@@ -1,4 +1,4 @@
-var Aeolus = require('Aeolus');
+var Aeolus = require('aeolus');
 
 var port = process.env.PORT || 8080;
 
