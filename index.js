@@ -1,4 +1,4 @@
-var Aeolus = require('Aeolus');
+var Aeolus = require('aeolus');
 
 Aeolus.auth(function(user, pass, callback) {
   var isValid = user === "admin" && pass === "alpine";
