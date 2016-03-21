@@ -8,6 +8,19 @@ app.controller('MainCtrl', function ($scope, $http) {
   $scope.pass = "";
   $scope.data = "";
 
+  var updateResults = function(response) {
+    $scope.info = response;
+    var data = typeof response.data != "object" ? { message: response.data } : response.data;
+    new PrettyJSON.view.Node({
+      el:$('#result'),
+      data:data
+    });
+    new PrettyJSON.view.Node({
+      el:$('#headers'),
+      data:response.config.headers
+    });
+  };
+
   $scope.doRequest = function() {
     $scope.error = false;
     $scope.res = false;
@@ -16,18 +29,12 @@ app.controller('MainCtrl', function ($scope, $http) {
     } else {
       $http.defaults.headers.common.Authorization = undefined;
     }
-    $http({method: $scope.method, url: $scope.url}).then(function(response) {
-      $scope.res = true;
-      new PrettyJSON.view.Node({
-        el:$('#result'),
-        data:response
-      });
+    $http({method: $scope.method, url: $scope.url}, {data: "Hello!"}).then(function(response) {
+      $scope.error = false;
+      updateResults(response);
     }, function(response) {
       $scope.error = true;
-      new PrettyJSON.view.Node({
-        el:$('#result'),
-        data:response
-      });
+      updateResults(response);
     });
   };
 
