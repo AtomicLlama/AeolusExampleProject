@@ -8,5 +8,11 @@
   },
   "dependencies": {
     "aeolus": "^1.0.1"
+  },
+  "aeolus": {
+    "paths": {
+      "methods": "/methods",
+      "web": "/www"
+    }
   }
 }
